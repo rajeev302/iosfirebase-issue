@@ -4,29 +4,21 @@ package com.example.iosfirebaseissue.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import com.example.iosfirebaseissue.database.LabelTypeConverters
+import com.example.iosfirebaseissue.database.database
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @Entity
 @JsonClass(generateAdapter = true)
 data class IosFirebaseIssueResponseModel(
-    @PrimaryKey(autoGenerate = true)
-    var primaryKeyId: Int?,
-//    @ColumnInfo(name = "assignee")
-//    @Json(name = "assignee")
-//    var assignee: Any?,
-//    @ColumnInfo(name = "assignees")
-//    @Json(name = "assignees")
-//    var assignees: List<Any>?,
     @ColumnInfo(name = "author_association")
     @Json(name = "author_association")
     var authorAssociation: String?,
     @ColumnInfo(name = "body")
     @Json(name = "body")
     var body: String?,
-//    @ColumnInfo(name = "closed_at")
-//    @Json(name = "closed_at")
-//    var closedAt: Any?,
     @ColumnInfo(name = "comments")
     @Json(name = "comments")
     var comments: Int?,
@@ -45,27 +37,25 @@ data class IosFirebaseIssueResponseModel(
     @ColumnInfo(name = "id")
     @Json(name = "id")
     var id: Int?,
-//    @ColumnInfo(name = "labels")
-//    @Json(name = "labels")
-//    var labels: List<Label>?,
+    @ColumnInfo(name = "labels")
+    @Json(name = "labels")
+    var labels: List<Label>?,
     @ColumnInfo(name = "labels_url")
     @Json(name = "labels_url")
     var labelsUrl: String?,
     @ColumnInfo(name = "locked")
     @Json(name = "locked")
     var locked: Boolean?,
-//    @ColumnInfo(name = "milestone")
-//    @Json(name = "milestone")
-//    var milestone: Any?,
+    @PrimaryKey
     @ColumnInfo(name = "node_id")
     @Json(name = "node_id")
     var nodeId: String,
     @ColumnInfo(name = "number")
     @Json(name = "number")
     var number: Int?,
-//    @ColumnInfo(name = "pull_request")
-//    @Json(name = "pull_request")
-//    var pullRequest: PullRequest?,
+    @ColumnInfo(name = "pull_request")
+    @Json(name = "pull_request")
+    var pullRequest: PullRequest?,
     @ColumnInfo(name = "repository_url")
     @Json(name = "repository_url")
     var repositoryUrl: String?,
@@ -80,8 +70,8 @@ data class IosFirebaseIssueResponseModel(
     var updatedAt: String?,
     @ColumnInfo(name = "url")
     @Json(name = "url")
-    var url: String?
-//    @ColumnInfo(name = "user")
-//    @Json(name = "user")
-//    var user: User?
+    var url: String?,
+    @ColumnInfo(name = "user")
+    @Json(name = "user")
+    var user: User?
 )

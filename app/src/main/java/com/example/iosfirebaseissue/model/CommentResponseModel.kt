@@ -10,8 +10,6 @@ import com.squareup.moshi.JsonClass
 @Entity
 @JsonClass(generateAdapter = true)
 data class CommentResponseModel(
-    @PrimaryKey(autoGenerate = true)
-    var primaryKeyId: Int?,
     @ColumnInfo(name = "author_association")
     @Json(name = "author_association")
     var authorAssociation: String?,
@@ -30,6 +28,7 @@ data class CommentResponseModel(
     @ColumnInfo(name = "issue_url")
     @Json(name = "issue_url")
     var issueUrl: String?,
+    @PrimaryKey
     @ColumnInfo(name = "node_id")
     @Json(name = "node_id")
     var nodeId: String,
@@ -38,8 +37,8 @@ data class CommentResponseModel(
     var updatedAt: String?,
     @ColumnInfo(name = "url")
     @Json(name = "url")
-    var url: String?
-//    @ColumnInfo(name = "user")
-//    @Json(name = "user")
-//    var user: User?
+    var url: String?,
+    @ColumnInfo(name = "user")
+    @Json(name = "user")
+    var user: User?
 )

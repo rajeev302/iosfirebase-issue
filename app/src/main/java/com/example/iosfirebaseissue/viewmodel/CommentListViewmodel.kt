@@ -20,8 +20,8 @@ class CommentListViewmodel(application: Application): AndroidViewModel(applicati
     private val repository = Respository()
     val commentList: MutableList<CommentResponseModel> = mutableListOf()
 
-    fun getCommentList(context: Context, commentNumber: String, success: () -> Unit, failure: (message: String) -> Unit) = launch {
-        repository.getCommentList(context, commentNumber)?.let {
+    fun getCommentList(context: Context, commentNumber: String, nodeId: String, success: () -> Unit, failure: (message: String) -> Unit) = launch {
+        repository.getCommentList(context, commentNumber, nodeId)?.let {
             commentList.clear()
             commentList.addAll(it)
             success.invoke()

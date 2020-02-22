@@ -35,13 +35,21 @@ class Respository: CoroutineScope {
         }
     }
 
-    suspend fun getCommentList(context: Context, commentNumber: String): List<CommentResponseModel>? {
+    suspend fun getCommentList(context: Context, commentNumber: String, nodeId: String): List<CommentResponseModel>? {
         if (context.isInternetAvailable()){
-            return CoroutineScope(coroutineContext).async {
+            val commentList = CoroutineScope(coroutineContext).async {
                 return@async ApiService().getCommentList(coroutineContext, commentNumber)
             }.await()
+            CoroutineScope(coroutineContext).async {
+                commentList?.let {
+                    database.getDatabaseInstance(context).dao().insertAllComments(it)
+                }
+            }.await()
+            return commentList
         } else {
-            return null
+            return CoroutineScope(coroutineContext).async {
+                database.getDatabaseInstance(context).dao().getAllComments(nodeId)
+            }.await()
         }
     }
 }
