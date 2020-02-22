@@ -3,6 +3,7 @@ package com.example.iosfirebaseissue.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import com.example.iosfirebaseissue.model.CommentResponseModel
 import com.example.iosfirebaseissue.model.IosFirebaseIssueResponseModel
 import com.example.iosfirebaseissue.repository.Respository
 import kotlinx.coroutines.CoroutineScope
@@ -11,18 +12,18 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class IssueListViewModel(application: Application): AndroidViewModel(application), CoroutineScope {
+class CommentListViewmodel(application: Application): AndroidViewModel(application), CoroutineScope {
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
     private val repository = Respository()
-    val issueList: MutableList<IosFirebaseIssueResponseModel> = mutableListOf()
+    val commentList: MutableList<CommentResponseModel> = mutableListOf()
 
-    fun getIosFirebaseIssue(context: Context, success: () -> Unit, failure: (message: String) -> Unit) = launch {
-        repository.getIosFirebaseIssue(context)?.let {
-            issueList.clear()
-            issueList.addAll(it)
+    fun getCommentList(context: Context, commentNumber: String, success: () -> Unit, failure: (message: String) -> Unit) = launch {
+        repository.getCommentList(context, commentNumber)?.let {
+            commentList.clear()
+            commentList.addAll(it)
             success.invoke()
         }?:run {
             failure.invoke("failed to get message")
