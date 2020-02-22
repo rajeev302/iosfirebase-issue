@@ -10,6 +10,8 @@ import com.squareup.moshi.JsonClass
 @Entity
 @JsonClass(generateAdapter = true)
 data class IosFirebaseIssueResponseModel(
+    @PrimaryKey(autoGenerate = true)
+    var primaryKeyId: Int?,
 //    @ColumnInfo(name = "assignee")
 //    @Json(name = "assignee")
 //    var assignee: Any?,
@@ -55,7 +57,6 @@ data class IosFirebaseIssueResponseModel(
 //    @ColumnInfo(name = "milestone")
 //    @Json(name = "milestone")
 //    var milestone: Any?,
-    @PrimaryKey
     @ColumnInfo(name = "node_id")
     @Json(name = "node_id")
     var nodeId: String,
