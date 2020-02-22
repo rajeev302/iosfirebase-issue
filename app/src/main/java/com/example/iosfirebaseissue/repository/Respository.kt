@@ -2,6 +2,7 @@ package com.example.iosfirebaseissue.repository
 
 import android.content.Context
 import com.example.iosfirebaseissue.apiservice.ApiService
+import com.example.iosfirebaseissue.database.database
 import com.example.iosfirebaseissue.extensions.isInternetAvailable
 import com.example.iosfirebaseissue.model.CommentResponseModel
 import com.example.iosfirebaseissue.model.IosFirebaseIssueResponseModel
@@ -18,11 +19,19 @@ class Respository: CoroutineScope {
 
     suspend fun getIosFirebaseIssue(context: Context): List<IosFirebaseIssueResponseModel>? {
         if (context.isInternetAvailable()){
-            return CoroutineScope(coroutineContext).async {
+            val issueList = CoroutineScope(coroutineContext).async {
                 return@async ApiService().getIosFirebaseIssue(coroutineContext)
             }.await()
+            CoroutineScope(coroutineContext).async {
+                issueList?.let {
+                    database.getDatabaseInstance(context).dao().inserAllIssues(it)
+                }
+            }.await()
+            return issueList
         } else {
-            return null
+            return CoroutineScope(coroutineContext).async {
+                    database.getDatabaseInstance(context).dao().getAllIssues()
+            }.await()
         }
     }
 

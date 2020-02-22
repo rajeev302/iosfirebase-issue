@@ -21,7 +21,7 @@ class CommentListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val issueHolder = holder as IssueListViewHolder
-        issueHolder.commentUserName.text = dataSet[position].user?.login
+//        issueHolder.commentUserName.text = dataSet[position].user?.login
         issueHolder.commentBody.text = dataSet[position].body
     }
 
