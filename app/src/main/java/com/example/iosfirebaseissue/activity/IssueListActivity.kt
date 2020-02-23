@@ -45,7 +45,7 @@ class IssueListActivity : AppCompatActivity(), IssueListAdapter.IssueListAdapter
     override fun rowClicked(position: Int) {
         val intent = Intent(this, CommentListActivity::class.java)
         intent.putExtra(CommentListActivity.COMMENT_NUMBER, viewModel.issueList[position].number.toString())
-        intent.putExtra(CommentListActivity.NODE_ID, viewModel.issueList[position].nodeId)
+        intent.putExtra(CommentListActivity.ISSUES_NODE_ID, viewModel.issueList[position].nodeId)
         startActivity(intent)
     }
 

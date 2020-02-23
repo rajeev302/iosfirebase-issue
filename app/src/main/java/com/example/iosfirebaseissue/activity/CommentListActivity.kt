@@ -17,11 +17,11 @@ class CommentListActivity : AppCompatActivity() {
 
     companion object {
         const val COMMENT_NUMBER = "commentNumber"
-        const val NODE_ID = "nodeId"
+        const val ISSUES_NODE_ID = "nodeId"
     }
 
     var commentUrl: String? = null
-    var nodeId: String? = null
+    var issueNodeId: String? = null
     private lateinit var viewmodel: CommentListViewmodel
     private lateinit var recyclerView: RecyclerView
     private lateinit var commentListAdapter: CommentListAdapter
@@ -33,7 +33,7 @@ class CommentListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_comment_list)
         viewmodel = ViewModelProvider(this).get(CommentListViewmodel::class.java)
         commentUrl = intent.getStringExtra(COMMENT_NUMBER)
-        nodeId = intent.getStringExtra(NODE_ID)
+        issueNodeId = intent.getStringExtra(ISSUES_NODE_ID)
         setupUi()
         fireApiCall()
     }
@@ -50,7 +50,7 @@ class CommentListActivity : AppCompatActivity() {
 
     private fun fireApiCall(){
         commentUrl?.let {
-            viewmodel.getCommentList(this, nodeId?:"", it, {
+            viewmodel.getCommentList(this, it, issueNodeId?:"", {
                 progressBar.visibility = View.GONE
                 if (viewmodel.commentList.size>0){
                     noCommentAvailable.visibility = View.GONE

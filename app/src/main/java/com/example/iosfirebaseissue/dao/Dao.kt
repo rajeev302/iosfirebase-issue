@@ -10,8 +10,8 @@ import com.example.iosfirebaseissue.model.IosFirebaseIssueResponseModel
 
 @Dao
 interface Dao {
-    @Query("SELECT * FROM CommentResponseModel where node_id = :nodeId")
-    fun getAllComments(nodeId: String): List<CommentResponseModel>
+    @Query("SELECT * FROM CommentResponseModel where issueNodeId = :issueNodeId")
+    fun getAllComments(issueNodeId: String): List<CommentResponseModel>
 
     @Query("SELECT * FROM IosFirebaseIssueResponseModel")
     fun getAllIssues(): List<IosFirebaseIssueResponseModel>

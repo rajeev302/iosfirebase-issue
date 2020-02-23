@@ -40,5 +40,8 @@ data class CommentResponseModel(
     var url: String?,
     @ColumnInfo(name = "user")
     @Json(name = "user")
-    var user: User?
+    var user: User?,
+    @Transient
+    @ColumnInfo(name = "issueNodeId")
+    var issueNodeId: String = ""
 )
