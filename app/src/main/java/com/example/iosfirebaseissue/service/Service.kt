@@ -1,10 +1,12 @@
 package com.example.iosfirebaseissue.service
 
+import com.example.iosfirebaseissue.constants.Constants
 import com.example.iosfirebaseissue.model.CommentResponseModel
 import com.example.iosfirebaseissue.model.IosFirebaseIssueResponseModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface Service {
     @GET("issues")
