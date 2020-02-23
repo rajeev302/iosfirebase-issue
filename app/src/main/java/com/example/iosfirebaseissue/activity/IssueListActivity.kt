@@ -51,7 +51,7 @@ class IssueListActivity : AppCompatActivity(), IssueListAdapter.IssueListAdapter
 
     private fun fireApiCall(){
         viewModel.getIosFirebaseIssue(this, {
-            viewModel.updateCommentLocalStorage(this)
+//            viewModel.updateCommentLocalStorage(this)
             issueAdapter.notifyDataSetChanged()
             progressBar.visibility = View.GONE
             noDataAvailable.visibility = View.GONE
