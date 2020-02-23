@@ -3,6 +3,7 @@ package com.example.iosfirebaseissue.viewmodel
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import com.example.iosfirebaseissue.database.database
 import com.example.iosfirebaseissue.model.IosFirebaseIssueResponseModel
 import com.example.iosfirebaseissue.repository.Respository
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +27,12 @@ class IssueListViewModel(application: Application): AndroidViewModel(application
             success.invoke()
         }?:run {
             failure.invoke("failed to get message")
+        }
+    }
+
+    fun updateCommentLocalStorage(context: Context) = launch{
+        issueList.forEach {
+            repository.getCommentList(context, it.number.toString(), it.nodeId)
         }
     }
 }
