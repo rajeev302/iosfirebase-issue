@@ -23,6 +23,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        zomato {
+            dimension "version"
+        }
+        swiggy {
+            dimension "version"
+        }
+        Box8 {
+            dimension "version"
+        }
+    }
 }
 
 dependencies {
