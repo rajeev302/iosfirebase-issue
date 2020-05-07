@@ -1,6 +1,7 @@
 package com.example.iosfirebaseissue.repository
 
 import android.content.Context
+import com.example.flicker_search_photos.model.FlickerSearchTagApiResponseModel
 import com.example.iosfirebaseissue.apiservice.ApiService
 import com.example.iosfirebaseissue.database.database
 import com.example.iosfirebaseissue.extensions.isInternetAvailable
@@ -53,6 +54,17 @@ class Respository: CoroutineScope {
             return CoroutineScope(coroutineContext).async {
                 database.getDatabaseInstance(context).dao().getAllComments(issueNodeId)
             }.await()
+        }
+    }
+
+    suspend fun getPhotosBySearchTerm(context: Context, tags: String, page: Int?): FlickerSearchTagApiResponseModel? {
+        if (context.isInternetAvailable()){
+            val issueList = CoroutineScope(coroutineContext).async {
+                return@async ApiService().getPhotosBySearchTerm(coroutineContext, tags = tags, page = page)
+            }.await()
+            return issueList
+        } else {
+            return null
         }
     }
 }

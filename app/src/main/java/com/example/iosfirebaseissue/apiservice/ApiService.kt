@@ -1,6 +1,7 @@
 package com.example.iosfirebaseissue.apiservice
 
 import android.net.Network
+import com.example.flicker_search_photos.model.FlickerSearchTagApiResponseModel
 import com.example.iosfirebaseissue.constants.Constants
 import com.example.iosfirebaseissue.manager.NetworkManager
 import com.example.iosfirebaseissue.model.CommentResponseModel
@@ -20,6 +21,12 @@ class ApiService{
     suspend fun getCommentList(coroutineContext: CoroutineContext, commentNumber: String): List<CommentResponseModel>? = CoroutineScope(coroutineContext).async {
         val apiService = NetworkManager.makeRetrofitObject(Service::class.java, Constants.BASE_URL)
         val callResult = apiService.getCommentList(commentNumber)
+        callResult.execute().body()
+    }.await()
+
+    suspend fun getPhotosBySearchTerm(coroutineContext: CoroutineContext, tags: String, page: Int?): FlickerSearchTagApiResponseModel? = CoroutineScope(coroutineContext).async {
+        val apiService = NetworkManager.makeRetrofitObject(Service::class.java, Constants.FLICKR_BASE_URL)
+        val callResult = apiService.getPhotosBySearchTerm(tags = tags, page = page)
         callResult.execute().body()
     }.await()
 }
