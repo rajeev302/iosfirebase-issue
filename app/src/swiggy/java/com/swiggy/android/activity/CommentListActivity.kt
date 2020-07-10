@@ -1,4 +1,4 @@
-package com.example.iosfirebaseissue.activity
+package com.swiggy.android.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,8 +32,7 @@ class CommentListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment_list)
-        Log.d("GlobalComments","Hi There!")
-
+        Log.d("SwiggyComments","Hi There!")
         viewmodel = ViewModelProvider(this).get(CommentListViewmodel::class.java)
         commentUrl = intent.getStringExtra(COMMENT_NUMBER)
         issueNodeId = intent.getStringExtra(ISSUES_NODE_ID)

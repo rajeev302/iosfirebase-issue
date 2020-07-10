@@ -10,7 +10,6 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.iosfirebaseissue"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -29,12 +28,16 @@ android {
     productFlavors {
         zomato {
             dimension "version"
+            applicationId "com.zomato.android"
         }
         swiggy {
             dimension "version"
+            applicationId "com.swiggy.android"
         }
-        Box8 {
+
+        box8 {
             dimension "version"
+            applicationId "com.box8.android"
         }
     }
 }

@@ -20,6 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name="${applicationId}.CommentsListActivity"
+            android:targetActivity=".activity.CommentListActivity" />
+
     </application>
 
 </manifest>
