@@ -1,22 +1,22 @@
-package com.example.iosfirebaseissue.activity
+package com.zomato.android.activity
 
-import android.content.ComponentName
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iosfirebaseissue.BuildConfig
 import com.example.iosfirebaseissue.R
+import com.example.iosfirebaseissue.activity.CommentListActivity
 import com.example.iosfirebaseissue.adapter.IssueListAdapter
 import com.example.iosfirebaseissue.viewmodel.IssueListViewModel
 import kotlinx.android.synthetic.main.activity_issue_list.*
-
 
 class IssueListActivity : AppCompatActivity(), IssueListAdapter.IssueListAdapterCallback {
 
@@ -30,7 +30,7 @@ class IssueListActivity : AppCompatActivity(), IssueListAdapter.IssueListAdapter
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_issue_list)
 
-        Log.d("GlobalIssueListActivity", "appId --> " + BuildConfig.APPLICATION_ID)
+        Log.d("ZomatoIssueListActivity", "appId --> " + BuildConfig.APPLICATION_ID)
         viewModel = ViewModelProvider(this).get(IssueListViewModel::class.java)
         setupUi()
         fireApiCall()
@@ -47,8 +47,7 @@ class IssueListActivity : AppCompatActivity(), IssueListAdapter.IssueListAdapter
     }
 
     override fun rowClicked(position: Int) {
-        val intent = Intent()
-        intent.setClassName(packageName, "$packageName.CommentsListActivity")
+        val intent = Intent(this, CommentListActivity::class.java)
         intent.putExtra(CommentListActivity.COMMENT_NUMBER, viewModel.issueList[position].number.toString())
         intent.putExtra(CommentListActivity.ISSUES_NODE_ID, viewModel.issueList[position].nodeId)
         startActivity(intent)
