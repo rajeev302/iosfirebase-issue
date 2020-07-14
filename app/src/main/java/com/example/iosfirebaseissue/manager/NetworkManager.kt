@@ -1,5 +1,6 @@
 package com.example.iosfirebaseissue.manager
 
+import com.example.iosfirebaseissue.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,5 +28,9 @@ object NetworkManager {
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
         return retrofit.create(serviceClass)
+    }
+
+    fun getBaseUrl(): String{
+        return BuildConfig.BASE_URL
     }
 }

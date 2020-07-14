@@ -10,6 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
+import retrofit2.Retrofit
+import javax.security.auth.callback.Callback
 import kotlin.coroutines.CoroutineContext
 
 class Respository: CoroutineScope {

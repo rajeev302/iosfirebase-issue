@@ -29,12 +29,15 @@ android {
     productFlavors {
         zomato {
             dimension "version"
+            buildConfigField("String", "BASE_URL", "\"https://tools.cdc.gov/api/v2/resources/media/132608.rss\"")
         }
         swiggy {
             dimension "version"
+            buildConfigField("String", "BASE_URL", "\"https://www.who.int/rss-feeds/news-english.xml\"")
         }
-        Box8 {
+        box8 {
             dimension "version"
+            buildConfigField("String", "BASE_URL", "\"https://corona.lmao.ninja/v2/nyt/states?state\"")
         }
     }
 }
@@ -62,4 +65,5 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'com.android.volley:volley:1.1.1'
 }

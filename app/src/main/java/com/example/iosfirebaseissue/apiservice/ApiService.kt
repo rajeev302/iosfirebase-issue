@@ -8,6 +8,8 @@ import com.example.iosfirebaseissue.model.IosFirebaseIssueResponseModel
 import com.example.iosfirebaseissue.service.Service
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
+import retrofit2.Retrofit
+import javax.security.auth.callback.Callback
 import kotlin.coroutines.CoroutineContext
 
 class ApiService{
