@@ -13,9 +13,14 @@ android {
         applicationId "com.example.iosfirebaseissue"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Add config properties as build configs
+        rootProject.ext.config.each { p ->
+            if (p.key != 'VERSION_CODE' && p.key != 'VERSION_NAME' && p.key != 'APPLICATION_ID') {
+                buildConfigField("String", p.key, p.value)
+            }
+        }
     }
     buildTypes {
         release {
@@ -29,15 +34,24 @@ android {
     productFlavors {
         zomato {
             dimension "version"
-            buildConfigField("String", "BASE_URL", "\"https://tools.cdc.gov/api/v2/resources/media/132608.rss\"")
+            def envConfig = getProps("config/zomato.properties")
+            applicationId envConfig.getProperty("APPLICATION_ID").replace("\"", "")
+            versionCode envConfig.VERSION_CODE.replace("\"", "").toInteger()
+            versionName envConfig.VERSION_NAME.replace("\"", "")
         }
         swiggy {
             dimension "version"
-            buildConfigField("String", "BASE_URL", "\"https://www.who.int/rss-feeds/news-english.xml\"")
+            def envConfig = getProps("config/swiggy.properties")
+            applicationId envConfig.getProperty("APPLICATION_ID").replace("\"", "")
+            versionCode envConfig.VERSION_CODE.replace("\"", "").toInteger()
+            versionName envConfig.VERSION_NAME.replace("\"", "")
         }
         box8 {
             dimension "version"
-            buildConfigField("String", "BASE_URL", "\"https://corona.lmao.ninja/v2/nyt/states?state\"")
+            def envConfig = getProps("config/box8.properties")
+            applicationId envConfig.getProperty("APPLICATION_ID").replace("\"", "")
+            versionCode envConfig.VERSION_CODE.replace("\"", "").toInteger()
+            versionName envConfig.VERSION_NAME.replace("\"", "")
         }
     }
 }

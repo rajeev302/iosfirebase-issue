@@ -1,3 +1,6 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -13,6 +16,63 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+ext {
+    // Get the current flavor of the build Ex: dev, stg, prod
+    flavor = getCurrentFlavor()
+    if (flavor.isEmpty()) {
+        flavor = "swiggy"
+    }
+
+    // Read the .properties for config
+    config = getProps("config/" + flavor + '.properties')
+}
+
+//def getCurrentFlavor() {
+//    Gradle gradle = getGradle()
+//
+//    // match optional modules followed by the task
+//    // [a-z]+([A-Za-z]+) will capture the flavor part of the task name onward (e.g., assembleDevRelease --> Dev)
+//    def pattern = Pattern.compile("(zomato|swiggy|box8)")
+//    def flavor = ""
+//
+//    gradle.getStartParameter().getTaskNames().any { name ->
+//        Matcher matcher = pattern.matcher(name)
+//        if (matcher.find()) {
+//            flavor = matcher.group(1).toLowerCase()
+//        }
+//    }
+//
+//    return flavor
+//}
+
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+    String  tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+
+    Pattern pattern
+
+    if( tskReqStr.contains( "assemble" ) )
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    Matcher matcher = pattern.matcher( tskReqStr )
+
+    if( matcher.find() )
+        return matcher.group(1).toLowerCase()
+    else
+    {
+        println "NO MATCH FOUND"
+        return ""
+    }
+}
+
+def getProps(path) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(path)))
+    return props
 }
 
 allprojects {
