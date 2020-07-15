@@ -14,16 +14,16 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon, roundIcon">
 
-        <activity android:name="com.swiggy.android.activity.CommentListActivity" />
+<!--        <activity android:name="com.box8.android.activity.CommentListActivity" />-->
 
-        <activity-alias
-            android:name="${applicationId}.CommentsListActivity"
-            android:targetActivity="com.swiggy.android.activity.CommentListActivity"
-            tools:replace="android:targetActivity" />
+<!--        <activity-alias-->
+<!--            android:name="${applicationId}.CommentsListActivity"-->
+<!--            android:targetActivity="com.box8.android.activity.CommentListActivity"-->
+<!--            tools:replace="android:targetActivity" />-->
 
-        <activity
-            android:name="com.example.iosfirebaseissue.activity.CommentListActivity"
-            tools:node="remove" />
+<!--        <activity-->
+<!--            android:name="com.example.iosfirebaseissue.activity.CommentListActivity"-->
+<!--            tools:node="remove" />-->
     </application>
 
 </manifest>
